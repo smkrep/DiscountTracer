@@ -35,7 +35,7 @@ QT_END_NAMESPACE
 
 class Item {
 public:
-    Item(const QUrl& link, const int& timespan, const QString& nickname); //пользовательский тип данных, хранит в себе информацию о товаре
+    Item(const QUrl& link, const int& timespan, const QString& nickname); //РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРёР№ С‚РёРї РґР°РЅРЅС‹С…, С…СЂР°РЅРёС‚ РІ СЃРµР±Рµ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ С‚РѕРІР°СЂРµ
     Item(const QUrl& link, const int& timespan, const QString& nickname, const QString& shop);
     Item() = default;                                                                         
     ~Item() = default;

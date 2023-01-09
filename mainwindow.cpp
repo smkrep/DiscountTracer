@@ -135,7 +135,7 @@ void MainWindow::on_addItemButton_clicked()
 {
     if (ui->linkLineEdit->text() == "") {
         ui->statusLabel->setStyleSheet("QLabel {color:red;}");
-        ui->statusLabel->setText(QString::fromLocal8Bit("Ââåäèòå ññûëêó!"));
+        ui->statusLabel->setText(QString::fromLocal8Bit("Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÑÑ‹Ð»ÐºÑƒ!"));
 
         QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
         return;
@@ -168,7 +168,7 @@ void MainWindow::on_deleteItemButton_clicked() {
     }
     else {
         ui->statusLabel->setStyleSheet("QLabel {color:red;}");
-        ui->statusLabel->setText(QString::fromLocal8Bit("Âûáåðèòå òîâàð äëÿ óäàëåíèÿ!"));
+        ui->statusLabel->setText(QString::fromLocal8Bit("Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ñ‚Ð¾Ð²Ð°Ñ€ Ð´Ð»Ñ ÑƒÐ´Ð°Ð»ÐµÐ½Ð¸Ñ!"));
 
         QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
     }
@@ -274,13 +274,13 @@ void MainWindow::discountSlot(QString name) {
             break;
         }
     }
-    //ui->threadStatusLabel->setText(QString::fromLocal8Bit("Ñêèäêà"));
+    //ui->threadStatusLabel->setText(QString::fromLocal8Bit("Ð¡ÐºÐ¸Ð´ÐºÐ°"));
     //QMessageBox::information(this, QString::fromLocal8Bit("1k"), QString::fromLocal8Bit("1k"));
 }
 
 void MainWindow::noDiscountSlot() {
     
-    //ui->threadStatusLabel->setText(QString::fromLocal8Bit("Íåò ñêèäêè"));
+    //ui->threadStatusLabel->setText(QString::fromLocal8Bit("ÐÐµÑ‚ ÑÐºÐ¸Ð´ÐºÐ¸"));
     //QMessageBox::information(this, QString::fromLocal8Bit("3k"), QString::fromLocal8Bit("3k"));
 }
 
@@ -305,7 +305,7 @@ void MainWindow::viewTimeSlot() {
     std::string timestr = time.toStdString();
     size_t found = timestr.find("2023");
     timestr.erase(found, 4);
-    ui->threadStatusLabel->setText(QString::fromLocal8Bit("Ïîñëåäíÿÿ ïðîâåðêà îñóùåñòâëåíà:\n\n ") + QString::fromStdString(timestr));
+    ui->threadStatusLabel->setText(QString::fromLocal8Bit("ÐŸÐ¾ÑÐ»ÐµÐ´Ð½ÑÑ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð¾ÑÑƒÑ‰ÐµÑÑ‚Ð²Ð»ÐµÐ½Ð°:\n\n ") + QString::fromStdString(timestr));
 }
 
 bool MainWindow::shopParsingIsSupported(const QString& shopname) {
@@ -331,7 +331,7 @@ void MainWindow::exportListToJson() {
     QJsonArray content;
     if (itemsList.empty()) {
         ui->statusLabel->setStyleSheet("QLabel {color:red;}");
-        ui->statusLabel->setText(QString::fromLocal8Bit("Äîáàâüòå õîòÿ áû îäèí òîâàð!"));
+        ui->statusLabel->setText(QString::fromLocal8Bit("Ð”Ð¾Ð±Ð°Ð²ÑŒÑ‚Ðµ Ñ…Ð¾Ñ‚Ñ Ð±Ñ‹ Ð¾Ð´Ð¸Ð½ Ñ‚Ð¾Ð²Ð°Ñ€!"));
 
         QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
         return;
@@ -371,13 +371,13 @@ void MainWindow::exportListToJson() {
             file.close();
 
             ui->statusLabel->setStyleSheet("QLabel {color:green;}");
-            ui->statusLabel->setText(QString::fromLocal8Bit("Òîâàðû ñîõðàíåíû!"));
+            ui->statusLabel->setText(QString::fromLocal8Bit("Ð¢Ð¾Ð²Ð°Ñ€Ñ‹ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ñ‹!"));
 
             QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
         }
         else {
             ui->statusLabel->setStyleSheet("QLabel {color:red;}");
-            ui->statusLabel->setText(QString::fromLocal8Bit("Íå óäàëîñü îòêðûòü ôàéë!"));
+            ui->statusLabel->setText(QString::fromLocal8Bit("ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚ÑŒ Ñ„Ð°Ð¹Ð»!"));
 
             QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
         }
@@ -394,7 +394,7 @@ void MainWindow::importListFromJson() {
     QFile file("./config.json");
 
     if (!file.exists()) {
-        QMessageBox::information(this, QString::fromLocal8Bit("Îøèáêà çàãðóçêè"), QString::fromLocal8Bit("Ôàéë config.json íå íàéäåí!"));
+        QMessageBox::information(this, QString::fromLocal8Bit("ÐžÑˆÐ¸Ð±ÐºÐ° Ð·Ð°Ð³Ñ€ÑƒÐ·ÐºÐ¸"), QString::fromLocal8Bit("Ð¤Ð°Ð¹Ð» config.json Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½!"));
         return;
     }
 
@@ -407,7 +407,7 @@ void MainWindow::importListFromJson() {
     }
     else {
 
-        QMessageBox::information(this, QString::fromLocal8Bit("Îøèáêà îòêðûòèÿ"), QString::fromLocal8Bit("Íå óäàëîñü îòêðûòü config.json!"));
+        QMessageBox::information(this, QString::fromLocal8Bit("ÐžÑˆÐ¸Ð±ÐºÐ° Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚Ð¸Ñ"), QString::fromLocal8Bit("ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚ÑŒ config.json!"));
         return;  
     }
 
@@ -415,7 +415,7 @@ void MainWindow::importListFromJson() {
     document = QJsonDocument::fromJson(bytes, &jsonError);
     if (jsonError.error != QJsonParseError::NoError)
     {
-        QMessageBox::information(this, QString::fromLocal8Bit("Îøèáêà ïàðñèíãà"), QString::fromLocal8Bit("Íå óäàëîñü ðàñïàðñèòü config.json!"));
+        QMessageBox::information(this, QString::fromLocal8Bit("ÐžÑˆÐ¸Ð±ÐºÐ° Ð¿Ð°Ñ€ÑÐ¸Ð½Ð³Ð°"), QString::fromLocal8Bit("ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ñ€Ð°ÑÐ¿Ð°Ñ€ÑÐ¸Ñ‚ÑŒ config.json!"));
         return;
     }
 
@@ -436,7 +436,7 @@ void MainWindow::importListFromJson() {
     updateList();
 
     ui->statusLabel->setStyleSheet("QLabel {color:green;}");
-    ui->statusLabel->setText(QString::fromLocal8Bit("Òîâàðû èç êîíôèãà ïîäãðóæåíû!"));
+    ui->statusLabel->setText(QString::fromLocal8Bit("Ð¢Ð¾Ð²Ð°Ñ€Ñ‹ Ð¸Ð· ÐºÐ¾Ð½Ñ„Ð¸Ð³Ð° Ð¿Ð¾Ð´Ð³Ñ€ÑƒÐ¶ÐµÐ½Ñ‹!"));
 
     QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
 
@@ -479,7 +479,7 @@ QString getShopName(const std::string& temp) {
         }
     }
     else {
-        std::size_t found = temp.find("://");  //àëãîðèòì äëÿ îïðåäåëåíèÿ èìåíè ìàãàçèíà, íà êîòîðûé âåäåò ññûëêà
+        std::size_t found = temp.find("://");  //Ð°Ð»Ð³Ð¾Ñ€Ð¸Ñ‚Ð¼ Ð´Ð»Ñ Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð¸Ñ Ð¸Ð¼ÐµÐ½Ð¸ Ð¼Ð°Ð³Ð°Ð·Ð¸Ð½Ð°, Ð½Ð° ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ð¹ Ð²ÐµÐ´ÐµÑ‚ ÑÑÑ‹Ð»ÐºÐ°
         if (found != std::string::npos) {
             found += 3;
             while (temp[found] != '.') {
@@ -509,7 +509,7 @@ Item::Item(const QUrl& link, const int& timespan, const QString& nickname) {
 
     link_ = link;
     if (nickname == "") {
-        nickname_ = QString::fromLocal8Bit("Áåçûìÿííûé òîâàð ") + QString::number(MainWindow::defaultNameNum_);
+        nickname_ = QString::fromLocal8Bit("Ð‘ÐµÐ·Ñ‹Ð¼ÑÐ½Ð½Ñ‹Ð¹ Ñ‚Ð¾Ð²Ð°Ñ€ ") + QString::number(MainWindow::defaultNameNum_);
     }
     else {
         nickname_ = nickname;
@@ -616,14 +616,14 @@ void MainWindow::processInput() {
 
     if (!linkIsValid) {
         ui->statusLabel->setStyleSheet("QLabel {color:red;}");
-        ui->statusLabel->setText(QString::fromLocal8Bit("Ññûëêà íåâàëèäíà \n ëèáî îòñóòñòâóåò ïîäêëþ÷åíèå ê Èíòåðíåòó!"));
+        ui->statusLabel->setText(QString::fromLocal8Bit("Ð¡ÑÑ‹Ð»ÐºÐ° Ð½ÐµÐ²Ð°Ð»Ð¸Ð´Ð½Ð° \n Ð»Ð¸Ð±Ð¾ Ð¾Ñ‚ÑÑƒÑ‚ÑÑ‚Ð²ÑƒÐµÑ‚ Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµ Ðº Ð˜Ð½Ñ‚ÐµÑ€Ð½ÐµÑ‚Ñƒ!"));
 
         QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
         return;
     }
     else if (linkIsValid && getShopName(ui->linkLineEdit->text().toStdString()) == "") {
         ui->statusLabel->setStyleSheet("QLabel {color:red;}");
-        ui->statusLabel->setText(QString::fromLocal8Bit("Â íàñòîÿùåå âðåìÿ ñàéò íå ïîääåðæèâàåòñÿ!"));
+        ui->statusLabel->setText(QString::fromLocal8Bit("Ð’ Ð½Ð°ÑÑ‚Ð¾ÑÑ‰ÐµÐµ Ð²Ñ€ÐµÐ¼Ñ ÑÐ°Ð¹Ñ‚ Ð½Ðµ Ð¿Ð¾Ð´Ð´ÐµÑ€Ð¶Ð¸Ð²Ð°ÐµÑ‚ÑÑ!"));
 
         QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
         return;
@@ -634,7 +634,7 @@ void MainWindow::processInput() {
         ui->timespanLineEdit->text().toInt(&ok);
         if (!ok && ui->timespanLineEdit->text() != "") {
             ui->statusLabel->setStyleSheet("QLabel {color:red;}");
-            ui->statusLabel->setText(QString::fromLocal8Bit("Óêàæèòå âàëèäíûé èíòåðâàë îïðîñà!"));
+            ui->statusLabel->setText(QString::fromLocal8Bit("Ð£ÐºÐ°Ð¶Ð¸Ñ‚Ðµ Ð²Ð°Ð»Ð¸Ð´Ð½Ñ‹Ð¹ Ð¸Ð½Ñ‚ÐµÑ€Ð²Ð°Ð» Ð¾Ð¿Ñ€Ð¾ÑÐ°!"));
 
             QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
             return;
@@ -643,7 +643,7 @@ void MainWindow::processInput() {
             Item item(ui->linkLineEdit->text(), ui->timespanLineEdit->text().toInt(), ui->nicknameLineEdit->text());
             itemsList.push_back(item);
             ui->statusLabel->setStyleSheet("QLabel {color:green;}");
-            ui->statusLabel->setText(QString::fromLocal8Bit("Òîâàð óñïåøíî äîáàâëåí!"));
+            ui->statusLabel->setText(QString::fromLocal8Bit("Ð¢Ð¾Ð²Ð°Ñ€ ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½!"));
             
             QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
             ui->linkLineEdit->clear();
