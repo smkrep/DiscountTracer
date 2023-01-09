@@ -77,7 +77,6 @@ private:
 
 
 
-
 class Worker : public QObject {
     Q_OBJECT
 
@@ -93,7 +92,6 @@ public:
 
 public slots:
     void process();
-    void findDiscount(QNetworkReply* reply);
 signals:
     void finished();
     void discount(QString);

@@ -700,26 +700,6 @@ void Worker::getHTML() {
 
 }
 
-void Worker::findDiscount(QNetworkReply* reply) {
-    QString answer = reply->readAll();
-
-//#ifdef _WIN32
-//    typedef bool (*parser) (std::string);
-//    parser parse;
-//    parse = (parser)*GetProcAddress(load_, "parse");
-//#else
-//    bool (*parse) (std::string);
-//    parse = (bool (*)(std::string))dlsym(handle_, "parse");
-//#endif
-//    migalka++;
-//
-//    if (parse(answer.toStdString())) {
-//        emit discount((*iter_).getName());
-//    }
-//    else {
-//        //emit noDiscount();
-//    }
-}
 
 void Worker::copyItems(std::vector<Item> items) {
     itemsListCopy = items;
