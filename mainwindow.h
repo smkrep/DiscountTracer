@@ -180,7 +180,6 @@ signals:
 private slots:
     void on_addItemButton_clicked();
     void updateList();
-    void updateListOnDiscount(QString);
     void on_startButton_clicked();
     void on_stopButton_clicked();
     void on_deleteItemButton_clicked();

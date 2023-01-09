@@ -245,26 +245,6 @@ void MainWindow::updateList() {
     }
 }
 
-void MainWindow::updateListOnDiscount(QString name) {
-
-    
-    ui->ItemsList->clear();
-
-    for (int iter = 0; iter < itemsListSize(); iter++) {
-        if (getItemName(iter) == name) {
-            QListWidgetItem* itm = new QListWidgetItem();
-            itm->setText(getItemName(iter));
-            itm->setTextColor(Qt::green);
-            ui->ItemsList->addItem(itm);
-        }
-        else {
-            ui->ItemsList->addItem(getItemName(iter));
-        }
-        
-    }
-
-}
-
 void MainWindow::discountSlot(QString name) {
     for (auto iter = itemsList.begin(); iter != itemsList.end();iter++) {
         if (iter->getName() == name) {
