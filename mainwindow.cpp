@@ -135,7 +135,7 @@ void MainWindow::on_addItemButton_clicked()
 {
     if (ui->linkLineEdit->text() == "") {
         ui->statusLabel->setStyleSheet("QLabel {color:red;}");
-        ui->statusLabel->setText(QString::fromLocal8Bit("Введите ссылку!"));
+        ui->statusLabel->setText(QString("Введите ссылку!"));
 
         QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
         return;
@@ -168,7 +168,7 @@ void MainWindow::on_deleteItemButton_clicked() {
     }
     else {
         ui->statusLabel->setStyleSheet("QLabel {color:red;}");
-        ui->statusLabel->setText(QString::fromLocal8Bit("Выберите товар для удаления!"));
+        ui->statusLabel->setText(QString("Выберите товар для удаления!"));
 
         QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
     }
@@ -274,7 +274,7 @@ void MainWindow::viewTimeSlot() {
     std::string timestr = time.toStdString();
     size_t found = timestr.find("2023");
     timestr.erase(found, 4);
-    ui->threadStatusLabel->setText(QString::fromLocal8Bit("Последняя проверка осуществлена:\n\n ") + QString::fromStdString(timestr));
+    ui->threadStatusLabel->setText(QString("Последняя проверка осуществлена:\n\n ") + QString::fromStdString(timestr));
 }
 
 bool MainWindow::shopParsingIsSupported(const QString& shopname) {
@@ -300,7 +300,7 @@ void MainWindow::exportListToJson() {
     QJsonArray content;
     if (itemsList.empty()) {
         ui->statusLabel->setStyleSheet("QLabel {color:red;}");
-        ui->statusLabel->setText(QString::fromLocal8Bit("Добавьте хотя бы один товар!"));
+        ui->statusLabel->setText(QString("Добавьте хотя бы один товар!"));
 
         QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
         return;
@@ -340,13 +340,13 @@ void MainWindow::exportListToJson() {
             file.close();
 
             ui->statusLabel->setStyleSheet("QLabel {color:green;}");
-            ui->statusLabel->setText(QString::fromLocal8Bit("Товары сохранены!"));
+            ui->statusLabel->setText(QString("Товары сохранены!"));
 
             QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
         }
         else {
             ui->statusLabel->setStyleSheet("QLabel {color:red;}");
-            ui->statusLabel->setText(QString::fromLocal8Bit("Не удалось открыть файл!"));
+            ui->statusLabel->setText(QString("Не удалось открыть файл!"));
 
             QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
         }
@@ -363,7 +363,7 @@ void MainWindow::importListFromJson() {
     QFile file("./config.json");
 
     if (!file.exists()) {
-        QMessageBox::information(this, QString::fromLocal8Bit("Ошибка загрузки"), QString::fromLocal8Bit("Файл config.json не найден!"));
+        QMessageBox::information(this, QString("Ошибка загрузки"), QString("Файл config.json не найден!"));
         return;
     }
 
@@ -376,7 +376,7 @@ void MainWindow::importListFromJson() {
     }
     else {
 
-        QMessageBox::information(this, QString::fromLocal8Bit("Ошибка открытия"), QString::fromLocal8Bit("Не удалось открыть config.json!"));
+        QMessageBox::information(this, QString("Ошибка открытия"), QString("Не удалось открыть config.json!"));
         return;  
     }
 
@@ -384,7 +384,7 @@ void MainWindow::importListFromJson() {
     document = QJsonDocument::fromJson(bytes, &jsonError);
     if (jsonError.error != QJsonParseError::NoError)
     {
-        QMessageBox::information(this, QString::fromLocal8Bit("Ошибка парсинга"), QString::fromLocal8Bit("Не удалось распарсить config.json!"));
+        QMessageBox::information(this, QString("Ошибка парсинга"), QString("Не удалось распарсить config.json!"));
         return;
     }
 
@@ -405,7 +405,7 @@ void MainWindow::importListFromJson() {
     updateList();
 
     ui->statusLabel->setStyleSheet("QLabel {color:green;}");
-    ui->statusLabel->setText(QString::fromLocal8Bit("Товары из конфига подгружены!"));
+    ui->statusLabel->setText(QString("Товары из конфига подгружены!"));
 
     QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
 
@@ -478,7 +478,7 @@ Item::Item(const QUrl& link, const int& timespan, const QString& nickname) {
 
     link_ = link;
     if (nickname == "") {
-        nickname_ = QString::fromLocal8Bit("Безымянный товар ") + QString::number(MainWindow::defaultNameNum_);
+        nickname_ = QString("Безымянный товар ") + QString::number(MainWindow::defaultNameNum_);
     }
     else {
         nickname_ = nickname;
@@ -585,14 +585,14 @@ void MainWindow::processInput() {
 
     if (!linkIsValid) {
         ui->statusLabel->setStyleSheet("QLabel {color:red;}");
-        ui->statusLabel->setText(QString::fromLocal8Bit("Ссылка невалидна \n либо отсутствует подключение к Интернету!"));
+        ui->statusLabel->setText(QString("Ссылка невалидна \n либо отсутствует подключение к Интернету!"));
 
         QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
         return;
     }
     else if (linkIsValid && getShopName(ui->linkLineEdit->text().toStdString()) == "") {
         ui->statusLabel->setStyleSheet("QLabel {color:red;}");
-        ui->statusLabel->setText(QString::fromLocal8Bit("В настоящее время сайт не поддерживается!"));
+        ui->statusLabel->setText(QString("В настоящее время сайт не поддерживается!"));
 
         QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
         return;
@@ -603,7 +603,7 @@ void MainWindow::processInput() {
         ui->timespanLineEdit->text().toInt(&ok);
         if (!ok && ui->timespanLineEdit->text() != "") {
             ui->statusLabel->setStyleSheet("QLabel {color:red;}");
-            ui->statusLabel->setText(QString::fromLocal8Bit("Укажите валидный интервал опроса!"));
+            ui->statusLabel->setText(QString("Укажите валидный интервал опроса!"));
 
             QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
             return;
@@ -612,7 +612,7 @@ void MainWindow::processInput() {
             Item item(ui->linkLineEdit->text(), ui->timespanLineEdit->text().toInt(), ui->nicknameLineEdit->text());
             itemsList.push_back(item);
             ui->statusLabel->setStyleSheet("QLabel {color:green;}");
-            ui->statusLabel->setText(QString::fromLocal8Bit("Товар успешно добавлен!"));
+            ui->statusLabel->setText(QString("Товар успешно добавлен!"));
             
             QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
             ui->linkLineEdit->clear();
