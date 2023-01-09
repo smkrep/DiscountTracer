@@ -185,7 +185,6 @@ void MainWindow::on_startButton_clicked() {
     connect(this, SIGNAL(startProcessing()), worker, SLOT(process()));
 
     connect(worker, SIGNAL(discount(QString)), this, SLOT(discountSlot(QString)));
-    connect(worker, SIGNAL(noDiscount()), this, SLOT(noDiscountSlot()));
     connect(worker, SIGNAL(updateListSignal()), this, SLOT(updateList()));
     connect(worker, SIGNAL(viewTime()), this, SLOT(viewTimeSlot()));
 
@@ -237,7 +236,7 @@ void MainWindow::updateList() {
             itm->setText(iter->getName());
             itm->setTextColor(Qt::green);
             ui->ItemsList->addItem(itm);
-            //delete itm;
+            
         }
         else {
             ui->ItemsList->addItem(iter->getName());
@@ -257,7 +256,6 @@ void MainWindow::updateListOnDiscount(QString name) {
             itm->setText(getItemName(iter));
             itm->setTextColor(Qt::green);
             ui->ItemsList->addItem(itm);
-            //delete itm;
         }
         else {
             ui->ItemsList->addItem(getItemName(iter));
@@ -274,14 +272,7 @@ void MainWindow::discountSlot(QString name) {
             break;
         }
     }
-    //ui->threadStatusLabel->setText(QString::fromLocal8Bit("Скидка"));
-    //QMessageBox::information(this, QString::fromLocal8Bit("1k"), QString::fromLocal8Bit("1k"));
-}
-
-void MainWindow::noDiscountSlot() {
     
-    //ui->threadStatusLabel->setText(QString::fromLocal8Bit("Нет скидки"));
-    //QMessageBox::information(this, QString::fromLocal8Bit("3k"), QString::fromLocal8Bit("3k"));
 }
 
 void MainWindow::on_stopButton_clicked() {
@@ -291,8 +282,6 @@ void MainWindow::on_stopButton_clicked() {
     ui->stopButton->setDisabled(true);
     ui->addItemButton->setDisabled(false);
 
-
-    //ui->threadStatusLabel->setText("default text");
     for (auto it = itemsList.begin(); it != itemsList.end(); it++) {
         it->setDiscountStatus(false);
     }
@@ -719,9 +708,6 @@ void Worker::getHTML() {
             //migalka++;
             if (parse(answer.toStdString())) {
                 emit discount((*iter).getName());
-            }
-            else {
-                //emit noDiscount();
             }
 
             (*iter).setLastCheckupTime(std::chrono::steady_clock::now());

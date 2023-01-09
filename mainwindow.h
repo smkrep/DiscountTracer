@@ -97,7 +97,6 @@ public slots:
 signals:
     void finished();
     void discount(QString);
-    void noDiscount();
     void updateListSignal();
     void viewTime();
     
@@ -161,11 +160,6 @@ private:
     QThread* thread;
     QTimer* timer;
 
-    //QJsonDocument document;
-    //QJsonArray content;
-
-
-
     inline static bool linkIsValid = false;
     inline static std::vector<Item> itemsList;
 
@@ -195,7 +189,6 @@ private slots:
     void clearStatusLabel();
 
     void discountSlot(QString name);
-    void noDiscountSlot();
 
     void viewTimeSlot();
 
