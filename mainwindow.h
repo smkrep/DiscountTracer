@@ -121,7 +121,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    inline static int defaultNameNum_ = 0;
+    inline static int defaultNameNum_ = 1;
     #ifdef _WIN32
         static void insertDllIntoList(const HINSTANCE& mem, const fs::path& filepath);
 

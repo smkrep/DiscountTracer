@@ -479,6 +479,7 @@ Item::Item(const QUrl& link, const int& timespan, const QString& nickname) {
     link_ = link;
     if (nickname == "") {
         nickname_ = QString("Безымянный товар ") + QString::number(MainWindow::defaultNameNum_);
+        MainWindow::defaultNameNum_++;
     }
     else {
         nickname_ = nickname;
@@ -598,7 +599,6 @@ void MainWindow::processInput() {
         return;
     }
     else {
-        defaultNameNum_++;
         bool ok;
         ui->timespanLineEdit->text().toInt(&ok);
         if (!ok && ui->timespanLineEdit->text() != "") {
