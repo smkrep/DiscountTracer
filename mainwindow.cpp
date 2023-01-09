@@ -685,7 +685,6 @@ void Worker::getHTML() {
                 parse = (bool (*)(std::string))dlsym((*iter).getHandle(), "parse");
             #endif
 
-            //migalka++;
             if (parse(answer.toStdString())) {
                 emit discount((*iter).getName());
             }

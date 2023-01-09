@@ -106,7 +106,6 @@ private:
     QNetworkRequest netRequest;
     QTimer* timer;
     std::vector<Item> itemsListCopy;
-    int migalka = 0;  
     
 
     std::vector<Item>::iterator iter_;
