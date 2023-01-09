@@ -3,23 +3,27 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+///QT INCLUDES////
 #include <QMainWindow>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
-#include <chrono>
-#include <QTimer>
-#include <filesystem>
-#include <fstream>
-#include <QMessageBox>
-#include <vector>
-#include <QObject>
-#include <QEventLoop>
-#include <string>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QFile>
 #include <QIODevice>
+#include <QObject>
+#include <QEventLoop>
+#include <QMessageBox>
+#include <QTimer>
+
+////STD INCLUDES////
+#include <chrono>
+#include <filesystem>
+#include <fstream>
+#include <vector>
+#include <string>
+
 
 #ifdef _WIN32
 #include <windows.h>
