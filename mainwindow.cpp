@@ -305,7 +305,7 @@ void MainWindow::viewTimeSlot() {
     std::string timestr = time.toStdString();
     size_t found = timestr.find("2023");
     timestr.erase(found, 4);
-    ui->threadStatusLabel->setText(QString::fromLocal8Bit("Последняя проверка осуществлена: ") + QString::fromStdString(timestr));
+    ui->threadStatusLabel->setText(QString::fromLocal8Bit("Последняя проверка осуществлена:\n\n ") + QString::fromStdString(timestr));
 }
 
 bool MainWindow::shopParsingIsSupported(const QString& shopname) {
@@ -616,7 +616,7 @@ void MainWindow::processInput() {
 
     if (!linkIsValid) {
         ui->statusLabel->setStyleSheet("QLabel {color:red;}");
-        ui->statusLabel->setText(QString::fromLocal8Bit("Ссылка невалидна либо отсутствует подключение к Интернету!"));
+        ui->statusLabel->setText(QString::fromLocal8Bit("Ссылка невалидна \n либо отсутствует подключение к Интернету!"));
 
         QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
         return;
