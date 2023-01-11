@@ -3,7 +3,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-///QT INCLUDES////
+////QT INCLUDES////
 #include <QMainWindow>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -39,7 +39,7 @@ QT_END_NAMESPACE
 
 class Item {
 public:
-    Item(const QUrl& link, const int& timespan, const QString& nickname); //пользовательский тип данных, хранит в себе информацию о товаре
+    Item(const QUrl& link, const int& timespan, const QString& nickname); 
     Item(const QUrl& link, const int& timespan, const QString& nickname, const QString& shop);
     Item() = default;                                                                         
     ~Item() = default;
