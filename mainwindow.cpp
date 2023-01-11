@@ -611,9 +611,9 @@ void MainWindow::deleteItem(const QString& nickname) {
     }
 }
 
-int MainWindow::itemsListSize() {
-    return itemsList.size();
-}
+//int MainWindow::itemsListSize() {
+//    return itemsList.size();
+//}
 
 void MainWindow::linkCheckFinished(QNetworkReply* reply) {
     if (reply->error()) {
@@ -690,7 +690,6 @@ void Worker::checkDiscount() {
     emit viewTime();
 
 }
-
 
 void Worker::copyItems(std::vector<Item> items) {
     itemsListCopy = items;
