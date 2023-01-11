@@ -49,9 +49,12 @@ public:
     QUrl getLink() const;
     QString getShop() const;
     std::chrono::steady_clock::time_point getLastCheckupTime() const;
+    bool getDiscountStatus() const;
+
+
     void setLastCheckupTime(std::chrono::steady_clock::time_point timepoint);
     void setDiscountStatus(bool status);
-    bool getDiscountStatus() const;
+    
 
     
     #ifdef _WIN32
@@ -89,7 +92,7 @@ public:
     Worker(QObject *parent = nullptr);
     ~Worker();
 
-    void getHTML();
+    void checkDiscount();
 
     void copyItems(std::vector<Item> items);
 

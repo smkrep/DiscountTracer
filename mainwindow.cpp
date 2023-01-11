@@ -3,7 +3,6 @@
 #include <QtCore>
 #include <QtGui>
 
-//void wait() {};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////MAINWINDOW DEFINITIONS////////////////////////////////////////////
@@ -657,11 +656,11 @@ void Worker::process() {
         item.setLastCheckupTime(std::chrono::steady_clock::now());
     }
     timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, this, &Worker::getHTML);
+    connect(timer, &QTimer::timeout, this, &Worker::checkDiscount);
     timer->start(3000); 
 }
 
-void Worker::getHTML() {
+void Worker::checkDiscount() {
     std::chrono::steady_clock::time_point currCheckUpTime = std::chrono::steady_clock::now();
 
     for (auto iter = itemsListCopy.begin(); iter != itemsListCopy.end(); iter++) {
