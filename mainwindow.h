@@ -39,22 +39,32 @@ QT_END_NAMESPACE
 
 class Item {
 public:
-    Item(const QUrl& link, const int& timespan, const QString& nickname); 
+    Item(const QUrl& link, const int& timespan, const QString& nickname);
+
     Item(const QUrl& link, const int& timespan, const QString& nickname, const QString& shop);
-    Item() = default;                                                                         
+
+    Item() = default;
+
     ~Item() = default;
 
+
     QString getName() const;
+
     int getTimespan() const;
+
     QUrl getLink() const;
+
     QString getShop() const;
+
     std::chrono::steady_clock::time_point getLastCheckupTime() const;
+
     bool getDiscountStatus() const;
+
     static QString getShopNameFromLink(const std::string& temp);
 
 
-
     void setLastCheckupTime(std::chrono::steady_clock::time_point timepoint);
+
     void setDiscountStatus(bool status);
     
 
@@ -91,7 +101,9 @@ class Worker : public QObject {
 
 public:
     friend class MainWindow;
+
     Worker(QObject *parent = nullptr);
+
     ~Worker();
 
     void checkDiscount();
@@ -101,6 +113,8 @@ public:
 
 public slots:
     void process();
+
+
 signals:
     void finished();
     void discount(QString);
@@ -129,18 +143,13 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+
     ~MainWindow();
-    inline static int defaultNameNum_ = 1;
-    #ifdef _WIN32
-        static void insertDllIntoList(const HINSTANCE& mem, const fs::path& filepath);
-
-    #else
-        static void insertDllIntoList(void* mem, fs::path& filepath); 
-    #endif
-
+    
     static bool shopParsingIsSupported(const QString& shopname);
 
     void openDll(fs::path path);
+
     void closeDll();
 
     static QString getItemName(const int& index);
@@ -152,6 +161,15 @@ public:
     void exportListToJson();
 
     void importListFromJson();
+
+    #ifdef _WIN32
+        static void insertDllIntoList(const HINSTANCE& mem, const fs::path& filepath);
+
+    #else
+        static void insertDllIntoList(void* mem, fs::path& filepath);
+    #endif
+
+    inline static int defaultNameNum_ = 1;
 
 
 private:
@@ -192,9 +210,6 @@ private slots:
     void updateList();
     void discountSlot(QString name);
     void viewTimeSlot();
-
-    
-
 };
 
 #endif // MAINWINDOW_H
