@@ -506,7 +506,7 @@ Item::Item(const QUrl& link, const int& timespan, const QString& nickname) {
         nickname_ = nickname;
     }
     if (timespan == 0) {
-        timespan_ = 5;
+        timespan_ = 15;
 
     }
     else {
