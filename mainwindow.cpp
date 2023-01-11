@@ -559,9 +559,9 @@ bool comparator(Item a, Item b) {
     return a.getTimespan() < b.getTimespan();
 }
 
-void MainWindow::sortItemsList() {
-    std::sort(itemsList.begin(), itemsList.end(), comparator);
-}
+//void MainWindow::sortItemsList() {
+//    std::sort(itemsList.begin(), itemsList.end(), comparator);
+//}
 
 void MainWindow::deleteItem(const QString& nickname) {
     defaultNameNum_--;

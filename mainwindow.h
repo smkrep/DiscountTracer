@@ -147,7 +147,7 @@ public:
 
     static void deleteItem(const QString& nickname);
 
-    static void sortItemsList();
+    /*static void sortItemsList();*/
 
     void processInput();
 
