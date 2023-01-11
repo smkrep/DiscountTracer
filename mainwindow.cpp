@@ -294,9 +294,8 @@ void MainWindow::updateList() {
         if (iter->getDiscountStatus()) {
             QListWidgetItem* itm = new QListWidgetItem();
             itm->setText(iter->getName());
-            itm->setTextColor(Qt::green);
+            itm->setForeground(Qt::green);
             ui->ItemsList->addItem(itm);
-            
         }
         else {
             ui->ItemsList->addItem(iter->getName());
@@ -643,7 +642,7 @@ void Worker::process() {
     }
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &Worker::checkDiscount);
-    timer->start(3000); 
+    timer->start(1*60*1000); 
 }
 
 void Worker::checkDiscount() {

@@ -180,21 +180,20 @@ signals:
     
 
 private slots:
-    void on_addItemButton_clicked();
-    void updateList();
+    void on_addItemButton_clicked(); 
     void on_startButton_clicked();
     void on_stopButton_clicked();
     void on_deleteItemButton_clicked();
+    void on_exportConfigButton_clicked();
+    void on_importConfigButton_clicked();
 
     void linkCheckFinished(QNetworkReply* reply);
     void clearStatusLabel();
-
+    void updateList();
     void discountSlot(QString name);
-
     void viewTimeSlot();
 
-    void on_exportConfigButton_clicked();
-    void on_importConfigButton_clicked();
+    
 
 };
 
