@@ -4,6 +4,10 @@ project(DiscountTracer VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+  set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/install" CACHE PATH "..." FORCE)
+endif()
+
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
@@ -58,6 +62,17 @@ if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(discounttracer)
 endif()
 
+######installation directly to build folder for proper debugging in VisualStudio####
 
+####################################################################################
 install(TARGETS DiscountTracer DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 install(TARGETS lamoda RUNTIME DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/dlls)
+####################################################################################
+
+
+######normal installation in a folder specified by CMAKE_INSTALL_PREFIX#############
+
+####################################################################################
+install(TARGETS DiscountTracer DESTINATION .)
+install(TARGETS lamoda RUNTIME DESTINATION ./dlls)
+####################################################################################
