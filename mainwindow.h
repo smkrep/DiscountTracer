@@ -195,41 +195,80 @@ private:
 
 
 
-
+/// <summary>
+/// Класс, который предоставляет функционал для периодической проверки товаров на наличие скидок
+/// </summary>
 class Worker : public QObject {
     Q_OBJECT
 
 public:
     friend class MainWindow;
-
+    /// <summary>
+    /// Конструктор класса Worker. В аргументы конструктора можно передать указатель на родительский класс,
+    /// что передаст управление памятью экземпляру родительского класса
+    /// </summary>
+    /// <param name="parent">Указатель на родительский класс</param>
     Worker(QObject *parent = nullptr);
 
+    /// <summary>
+    /// Деструктор класса Worker. В нем происходит освобождение памяти динамически выделенных полей netManager и timer,
+    /// также очищается копия массива товаров
+    /// </summary>
     ~Worker();
-
+    /// <summary>
+    /// Метод, раз в 15 минут проходящий по массиву товаров и проверяющий, пришло ли время проверять наличие скидки
+    /// </summary>
     void checkDiscount();
-
+    /// <summary>
+    /// Метод, копирующий массив товаров, хранящийся в экземпляре класса MainWindow, в приватный массив класса Worker
+    /// </summary>
+    /// <param name="items">Массив товаров</param>
     void copyItems(std::vector<Item> items);
 
 
 public slots:
+    /// <summary>
+    /// Слот, вызывающийся во время начала работы потока-обработчика. Создает таймер и запускает его, создает менеджер
+    /// подключения к сети
+    /// </summary>
     void process();
 
-
 signals:
-    void finished();
+    /// <summary>
+    /// Сигнал, испускаeмый методом process при обнаружении скидки. Передает имя товара в слот-обработчик discountSlot,
+    /// находящийся в классе MainWindow;
+    /// </summary>
     void discount(QString);
+    /// <summary>
+    /// Сигнал, испускаемый методом process в конце опроса всех товаров на наличие скидки. Обрабатывается слотом updateList,
+    /// находящимся в классе MainWindow
+    /// </summary>
     void updateListSignal();
+    /// <summary>
+    /// Сигнал, испускаемый методом process в конце опроса всех товаров на наличие скидки. Обрабатывается слотом viewTimeSlot,
+    /// находящимся в классе MainWindow
+    /// </summary>
     void viewTime();
     
 
 private:
+    /// <summary>
+    /// Поле, хранящее в себе указатель на менеджер доступа к сети
+    /// </summary>
     QNetworkAccessManager* netManager;
+    /// <summary>
+    /// Поле, хранящее в себе сетевой запрос, передаваемый менеджеру доступа к сети
+    /// </summary>
     QNetworkRequest netRequest;
+    /// <summary>
+    /// Поле, хранящее в себе указатель на таймер
+    /// </summary>
     QTimer* timer;
+    /// <summary>
+    /// Копия массива товаров, содержащегося в классе MainWindow
+    /// </summary>
     std::vector<Item> itemsListCopy;
     
-
-    std::vector<Item>::iterator iter_;
 };
 
 
