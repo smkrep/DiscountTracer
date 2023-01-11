@@ -148,6 +148,15 @@ void MainWindow::on_addItemButton_clicked()
     }
 }
 
+void MainWindow::linkCheckFinished(QNetworkReply* reply) {
+    if (reply->error()) {
+        linkIsValid = false;
+    }
+    else {
+        linkIsValid = true;
+    }
+}
+
 void MainWindow::processInput() {
 
     if (!linkIsValid) {
@@ -212,6 +221,16 @@ void MainWindow::on_deleteItemButton_clicked() {
         ui->statusLabel->setText(QString("Выберите товар для удаления!"));
 
         QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
+    }
+}
+
+void MainWindow::deleteItem(const QString& nickname) {
+    defaultNameNum_--;
+    for (std::vector<Item>::iterator iter = itemsList.begin(); iter != itemsList.end(); iter++) {
+        if ((*iter).getName() == nickname) {
+            itemsList.erase(iter);
+            break;
+        }
     }
 }
 
@@ -600,31 +619,6 @@ void* Item::getHandle() const {
     return this->handle_;
 }
 #endif
-
-void MainWindow::deleteItem(const QString& nickname) {
-    defaultNameNum_--;
-    for (std::vector<Item>::iterator iter = itemsList.begin(); iter != itemsList.end(); iter++) {
-        if ((*iter).getName() == nickname) {
-            itemsList.erase(iter);
-            break;
-        }
-    }
-}
-
-//int MainWindow::itemsListSize() {
-//    return itemsList.size();
-//}
-
-void MainWindow::linkCheckFinished(QNetworkReply* reply) {
-    if (reply->error()) {
-        linkIsValid = false;
-    }
-    else {
-        linkIsValid = true;
-    }
-
-
-}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////WORKER DEFINITIONS////////////////////////////////////////////////

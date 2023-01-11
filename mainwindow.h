@@ -145,8 +145,6 @@ public:
 
     static QString getItemName(const int& index);
 
-    //static int itemsListSize();
-
     static void deleteItem(const QString& nickname);
 
     void processInput();
