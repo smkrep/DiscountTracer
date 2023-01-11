@@ -50,6 +50,8 @@ public:
     QString getShop() const;
     std::chrono::steady_clock::time_point getLastCheckupTime() const;
     bool getDiscountStatus() const;
+    static QString getShopNameFromLink(const std::string& temp);
+
 
 
     void setLastCheckupTime(std::chrono::steady_clock::time_point timepoint);
@@ -146,8 +148,6 @@ public:
     static int itemsListSize();
 
     static void deleteItem(const QString& nickname);
-
-    /*static void sortItemsList();*/
 
     void processInput();
 

@@ -148,6 +148,48 @@ void MainWindow::on_addItemButton_clicked()
     }
 }
 
+void MainWindow::processInput() {
+
+    if (!linkIsValid) {
+        ui->statusLabel->setStyleSheet("QLabel {color:red;}");
+        ui->statusLabel->setText(QString("Ссылка невалидна \n либо отсутствует подключение к Интернету!"));
+
+        QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
+        return;
+    }
+    else if (linkIsValid && Item::getShopNameFromLink(ui->linkLineEdit->text().toStdString()) == "") {
+        ui->statusLabel->setStyleSheet("QLabel {color:red;}");
+        ui->statusLabel->setText(QString("В настоящее время сайт не поддерживается!"));
+
+        QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
+        return;
+    }
+    else {
+        bool ok;
+        ui->timespanLineEdit->text().toInt(&ok);
+        if (!ok && ui->timespanLineEdit->text() != "") {
+            ui->statusLabel->setStyleSheet("QLabel {color:red;}");
+            ui->statusLabel->setText(QString("Укажите валидный интервал опроса!"));
+
+            QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
+            return;
+        }
+        else {
+            Item item(ui->linkLineEdit->text(), ui->timespanLineEdit->text().toInt(), ui->nicknameLineEdit->text());
+            itemsList.push_back(item);
+            ui->statusLabel->setStyleSheet("QLabel {color:green;}");
+            ui->statusLabel->setText(QString("Товар успешно добавлен!"));
+
+            QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
+            ui->linkLineEdit->clear();
+            ui->timespanLineEdit->clear();
+            ui->nicknameLineEdit->clear();
+            emit newItemAdded();
+            ui->exportConfigButton->setEnabled(true);
+        }
+    }
+}
+
 void MainWindow::clearStatusLabel() {
     ui->statusLabel->clear();
 }
@@ -435,7 +477,39 @@ void MainWindow::insertDllIntoList(void* mem, fs::path& filepath) {
 //////////////////////////////////////////ITEM DEFINITIONS//////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-QString getShopName(const std::string& temp) {
+Item::Item(const QUrl& link, const int& timespan, const QString& nickname) {
+
+    link_ = link;
+    if (nickname == "") {
+        nickname_ = QString("Безымянный товар ") + QString::number(MainWindow::defaultNameNum_);
+        MainWindow::defaultNameNum_++;
+    }
+    else {
+        nickname_ = nickname;
+    }
+    if (timespan == 0) {
+        timespan_ = 5;
+
+    }
+    else {
+        timespan_ = timespan;
+    }
+
+    QString convert = link.toString(), name;
+    std::string temp = convert.toStdString();
+
+    shop_ = getShopNameFromLink(temp);
+
+}
+
+Item::Item(const QUrl& link, const int& timespan, const QString& nickname, const QString& shop) {
+    link_ = link;
+    timespan_ = timespan;
+    nickname_ = nickname;
+    shop_ = shop;
+}
+
+QString Item::getShopNameFromLink(const std::string& temp) {
 
     QString name;
     std::size_t found = temp.find("www.");
@@ -447,7 +521,7 @@ QString getShopName(const std::string& temp) {
         }
     }
     else {
-        std::size_t found = temp.find("://");  //алгоритм для определения имени магазина, на который ведет ссылка
+        std::size_t found = temp.find("://"); 
         if (found != std::string::npos) {
             found += 3;
             while (temp[found] != '.') {
@@ -473,38 +547,6 @@ QString getShopName(const std::string& temp) {
 
 }
 
-Item::Item(const QUrl& link, const int& timespan, const QString& nickname) {
-
-    link_ = link;
-    if (nickname == "") {
-        nickname_ = QString("Безымянный товар ") + QString::number(MainWindow::defaultNameNum_);
-        MainWindow::defaultNameNum_++;
-    }
-    else {
-        nickname_ = nickname;
-    }
-    if (timespan == 0) {
-        timespan_ = 5;
-    
-    }
-    else {
-        timespan_ = timespan;
-    }
-    
-    QString convert = link.toString(), name;
-    std::string temp = convert.toStdString();
-
-    shop_ = getShopName(temp);
-    
-}
-
-Item::Item(const QUrl& link, const int& timespan, const QString& nickname, const QString& shop) {
-    link_ = link;
-    timespan_ = timespan;
-    nickname_ = nickname;
-    shop_ = shop;
-}
-
 QString Item::getName() const {
     return this->nickname_;
 }
@@ -525,16 +567,20 @@ std::chrono::steady_clock::time_point Item::getLastCheckupTime() const {
     return this->lastCheckupTime_;
 }
 
+QString MainWindow::getItemName(const int& index) {
+    return itemsList[index].getName();
+}
+
+bool Item::getDiscountStatus() const {
+    return this->isDiscounted_;
+}
+
 void Item::setLastCheckupTime(std::chrono::steady_clock::time_point timepoint) {
     lastCheckupTime_ = timepoint;
 }
 
 void Item::setDiscountStatus(bool status) {
     isDiscounted_ = status;
-}
-
-bool Item::getDiscountStatus() const{
-    return this->isDiscounted_;
 }
 
 #ifdef _WIN32
@@ -555,14 +601,6 @@ void* Item::getHandle() const {
 }
 #endif
 
-bool comparator(Item a, Item b) {
-    return a.getTimespan() < b.getTimespan();
-}
-
-//void MainWindow::sortItemsList() {
-//    std::sort(itemsList.begin(), itemsList.end(), comparator);
-//}
-
 void MainWindow::deleteItem(const QString& nickname) {
     defaultNameNum_--;
     for (std::vector<Item>::iterator iter = itemsList.begin(); iter != itemsList.end(); iter++) {
@@ -575,52 +613,6 @@ void MainWindow::deleteItem(const QString& nickname) {
 
 int MainWindow::itemsListSize() {
     return itemsList.size();
-}
-
-QString MainWindow::getItemName(const int& index) {
-    return itemsList[index].getName();
-}
-
-void MainWindow::processInput() {
-
-    if (!linkIsValid) {
-        ui->statusLabel->setStyleSheet("QLabel {color:red;}");
-        ui->statusLabel->setText(QString("Ссылка невалидна \n либо отсутствует подключение к Интернету!"));
-
-        QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
-        return;
-    }
-    else if (linkIsValid && getShopName(ui->linkLineEdit->text().toStdString()) == "") {
-        ui->statusLabel->setStyleSheet("QLabel {color:red;}");
-        ui->statusLabel->setText(QString("В настоящее время сайт не поддерживается!"));
-
-        QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
-        return;
-    }
-    else {
-        bool ok;
-        ui->timespanLineEdit->text().toInt(&ok);
-        if (!ok && ui->timespanLineEdit->text() != "") {
-            ui->statusLabel->setStyleSheet("QLabel {color:red;}");
-            ui->statusLabel->setText(QString("Укажите валидный интервал опроса!"));
-
-            QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
-            return;
-        }
-        else {
-            Item item(ui->linkLineEdit->text(), ui->timespanLineEdit->text().toInt(), ui->nicknameLineEdit->text());
-            itemsList.push_back(item);
-            ui->statusLabel->setStyleSheet("QLabel {color:green;}");
-            ui->statusLabel->setText(QString("Товар успешно добавлен!"));
-            
-            QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
-            ui->linkLineEdit->clear();
-            ui->timespanLineEdit->clear();
-            ui->nicknameLineEdit->clear();
-            emit newItemAdded();
-            ui->exportConfigButton->setEnabled(true);
-        }
-    }
 }
 
 void MainWindow::linkCheckFinished(QNetworkReply* reply) {
