@@ -106,6 +106,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(this, &MainWindow::newItemAdded, this, &MainWindow::updateList);
 
     thread = new QThread(this);
+
 }
 
 MainWindow::~MainWindow()
