@@ -585,10 +585,6 @@ std::chrono::steady_clock::time_point Item::getLastCheckupTime() const {
     return this->lastCheckupTime_;
 }
 
-QString MainWindow::getItemName(const int& index) {
-    return itemsList[index].getName();
-}
-
 bool Item::getDiscountStatus() const {
     return this->isDiscounted_;
 }
