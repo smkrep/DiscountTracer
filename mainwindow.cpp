@@ -184,6 +184,12 @@ void MainWindow::processInput() {
             QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
             return;
         }
+        else if (ui->timespanLineEdit->text().toInt() < 15 && ui->timespanLineEdit->text() != "") {
+            ui->statusLabel->setStyleSheet("QLabel {color:red;}");
+            ui->statusLabel->setText(QString("Интервал опроса меньше минимально допустимого!"));
+            QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
+            return;
+        }
         else {
             Item item(ui->linkLineEdit->text(), ui->timespanLineEdit->text().toInt(), ui->nicknameLineEdit->text());
             itemsList.push_back(item);
