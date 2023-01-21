@@ -29,23 +29,13 @@ set(PROJECT_SOURCES
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(discounttracer
+    qt_add_executable(DiscountTracer
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
     )
-
-else()
-    if(ANDROID)
-        add_library(DiscountTracer SHARED
-            ${PROJECT_SOURCES}
-        )
-
-    else()
-        add_executable(DiscountTracer
-            ${PROJECT_SOURCES}
-        )
-    endif()
 endif()
+
+add_executable(DiscountTracer ${PROJECT_SOURCES})
 
 target_link_libraries(DiscountTracer PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 target_link_libraries(DiscountTracer PRIVATE Qt${QT_VERSION_MAJOR}::Network)
