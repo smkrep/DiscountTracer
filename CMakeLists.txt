@@ -33,9 +33,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
     )
+else()
+    add_executable(DiscountTracer ${PROJECT_SOURCES})
 endif()
-
-add_executable(DiscountTracer ${PROJECT_SOURCES})
 
 target_link_libraries(DiscountTracer PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 target_link_libraries(DiscountTracer PRIVATE Qt${QT_VERSION_MAJOR}::Network)
@@ -49,7 +49,7 @@ set_target_properties(DiscountTracer PROPERTIES
 )
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(discounttracer)
+    qt_finalize_executable(DiscountTracer)
 endif()
 
 ######installation directly to build folder for proper debugging in VisualStudio####
