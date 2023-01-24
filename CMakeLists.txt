@@ -65,4 +65,5 @@ install(TARGETS lamoda RUNTIME DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/dlls)
 ####################################################################################
 install(TARGETS DiscountTracer DESTINATION .)
 install(TARGETS lamoda RUNTIME DESTINATION ./dlls)
+install(FILES testcfg/config.json DESTINATION .)
 ####################################################################################
