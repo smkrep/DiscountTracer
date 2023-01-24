@@ -652,7 +652,7 @@ void Worker::checkDiscount() {
     std::chrono::steady_clock::time_point currCheckUpTime = std::chrono::steady_clock::now();
 
     for (auto iter = itemsListCopy.begin(); iter != itemsListCopy.end(); iter++) {
-        if (std::chrono::duration_cast<std::chrono::minutes>(currCheckUpTime - (*iter).getLastCheckupTime()) > std::chrono::minutes((*iter).getTimespan() - 1)) {
+        if (std::chrono::duration_cast<std::chrono::minutes>(currCheckUpTime - (*iter).getLastCheckupTime()) >= std::chrono::minutes((*iter).getTimespan() - 1)) {
             
             netRequest.setUrl((*iter).getLink());
             QNetworkReply* reply = netManager->get(netRequest);
