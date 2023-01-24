@@ -1,0 +1,28 @@
+{
+    "items": [
+        {
+            "link": "https://www.lamoda.ru/p/mp002xm0qrzd/clothes-colins-kurtka-uteplennaya/",
+            "nickname": "Куртка Colin's",
+            "shop": "lamoda",
+            "time_interval(minutes)": 25
+        },
+        {
+            "link": "https://www.lamoda.ru/p/mp002xm0984x/clothes-ostin-bryuki/",
+            "nickname": "Брюки О'стин",
+            "shop": "lamoda",
+            "time_interval(minutes)": 18
+        },
+        {
+            "link": "https://www.lamoda.ru/p/rtlaca440801/clothes-uniqlo-futbolka/",
+            "nickname": "Футболка Uniqlo",
+            "shop": "lamoda",
+            "time_interval(minutes)": 45
+        },
+        {
+            "link": "https://www.lamoda.ru/p/ad002amjyma2/shoes-adidas-krossovki/",
+            "nickname": "Кроссовки Adidas",
+            "shop": "lamoda",
+            "time_interval(minutes)": 22
+        }
+    ]
+}
