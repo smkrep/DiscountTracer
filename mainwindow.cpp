@@ -162,7 +162,10 @@ void MainWindow::validityCheckFinishedSlot(bool result) {
 }
 
 void MainWindow::linkCheckFinished(QNetworkReply* reply) {
-    if (reply->error()) {
+    if (reply->error() == 302) {
+        on_addItemButton_clicked();   
+    }
+    else if (reply->error() != QNetworkReply::NoError) {
         linkIsValid = false;
         emit validityCheckFinished(false);
     }
