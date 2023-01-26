@@ -104,6 +104,7 @@ MainWindow::MainWindow(QWidget *parent)
         SLOT(linkCheckFinished(QNetworkReply*)));
    
     connect(this, &MainWindow::newItemAdded, this, &MainWindow::updateList);
+    connect(this, &MainWindow::validityCheckFinished, this, &MainWindow::validityCheckFinishedSlot);
 
     thread = new QThread(this);
 
@@ -144,30 +145,36 @@ void MainWindow::on_addItemButton_clicked()
 
         request.setUrl(QUrl(ui->linkLineEdit->text()));
         manager->get(request);
-        QTimer::singleShot(600, this, &MainWindow::processInput);
-
     }
 }
 
-void MainWindow::linkCheckFinished(QNetworkReply* reply) {
-    if (reply->error()) {
-        linkIsValid = false;
+void MainWindow::validityCheckFinishedSlot(bool result) {
+    if (result) {
+        processInput();
     }
     else {
-        linkIsValid = true;
-    }
-}
-
-void MainWindow::processInput() {
-
-    if (!linkIsValid) {
         ui->statusLabel->setStyleSheet("QLabel {color:red;}");
         ui->statusLabel->setText(QString("Ссылка невалидна \n либо отсутствует подключение к Интернету!"));
 
         QTimer::singleShot(2000, this, &MainWindow::clearStatusLabel);
         return;
     }
-    else if (linkIsValid && Item::getShopNameFromLink(ui->linkLineEdit->text().toStdString()) == "") {
+}
+
+void MainWindow::linkCheckFinished(QNetworkReply* reply) {
+    if (reply->error()) {
+        linkIsValid = false;
+        emit validityCheckFinished(false);
+    }
+    else {
+        linkIsValid = true;
+        emit validityCheckFinished(true);
+    }
+}
+
+void MainWindow::processInput() {
+
+    if (linkIsValid && Item::getShopNameFromLink(ui->linkLineEdit->text().toStdString()) == "") {
         ui->statusLabel->setStyleSheet("QLabel {color:red;}");
         ui->statusLabel->setText(QString("В настоящее время сайт не поддерживается!"));
 

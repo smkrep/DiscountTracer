@@ -417,6 +417,8 @@ signals:
     /// Сигнал, после испускания которого запускается цикл опроса товаров на наличие скидки
     /// </summary>
     void startProcessing();
+
+    void validityCheckFinished(bool result);
     
 
 private slots:
@@ -473,6 +475,8 @@ private slots:
     /// (день недели, месяц, число, время в формате ЧЧ:ММ::СС)
     /// </summary>
     void viewTimeSlot();
+
+    void validityCheckFinishedSlot(bool result);
 };
 
 #endif // MAINWINDOW_H
