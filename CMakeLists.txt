@@ -57,7 +57,6 @@ endif()
 ####################################################################################
 install(TARGETS DiscountTracer DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 install(TARGETS lamoda RUNTIME DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/dlls)
-install(DIRECTORY opensslruntime DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 ####################################################################################
 
 
@@ -67,5 +66,4 @@ install(DIRECTORY opensslruntime DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 install(TARGETS DiscountTracer DESTINATION .)
 install(TARGETS lamoda RUNTIME DESTINATION ./dlls)
 install(FILES testcfg/config.json DESTINATION .)
-install(DIRECTORY opensslruntime DESTINATION .)
 ####################################################################################
