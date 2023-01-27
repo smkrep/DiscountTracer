@@ -8,12 +8,14 @@
 
 int main(int argc, char *argv[])
 {
+    
+    auto* a = new QApplication(argc, argv);
+    QCoreApplication::addLibraryPath(QString("./opensslruntime"));
+    MainWindow w;
+    w.show();
     qDebug() << "SslSupport: " << QSslSocket::supportsSsl();
     qDebug() << "SslLibraryBuildVersion: " << QSslSocket::sslLibraryBuildVersionString();
     qDebug() << "SslLibraryRuntimeVersion: " << QSslSocket::sslLibraryVersionString();
-    auto* a = new QApplication(argc, argv);
-    MainWindow w;
-    w.show();
 	return (*a).exec();
 
 }
