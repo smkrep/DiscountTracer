@@ -10,7 +10,6 @@ int main(int argc, char *argv[])
 {
     
     auto* a = new QApplication(argc, argv);
-    QCoreApplication::addLibraryPath(QString("./opensslruntime"));
     MainWindow w;
     w.show();
     qDebug() << "SslSupport: " << QSslSocket::supportsSsl();
