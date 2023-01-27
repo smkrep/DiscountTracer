@@ -8,6 +8,9 @@
 
 int main(int argc, char *argv[])
 {
+    qDebug() << "SslSupport: " << QSslSocket::supportsSsl();
+    qDebug() << "SslLibraryBuildVersion: " << QSslSocket::sslLibraryBuildVersionString();
+    qDebug() << "SslLibraryRuntimeVersion: " << QSslSocket::sslLibraryVersionString();
     auto* a = new QApplication(argc, argv);
     MainWindow w;
     w.show();
