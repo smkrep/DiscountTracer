@@ -58,7 +58,6 @@ endif()
 install(TARGETS DiscountTracer DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 install(TARGETS lamoda RUNTIME DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/dlls)
 install(FILES testcfg/config.json DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-install(FILES ssl/libssl-1_1-x64.dll ssl/libcrypto-1_1-x64.dll DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 ####################################################################################
 
 
@@ -68,5 +67,4 @@ install(FILES ssl/libssl-1_1-x64.dll ssl/libcrypto-1_1-x64.dll DESTINATION ${CMA
 install(TARGETS DiscountTracer DESTINATION .)
 install(TARGETS lamoda RUNTIME DESTINATION ./dlls)
 install(FILES testcfg/config.json DESTINATION .)
-install(FILES ssl/libssl-1_1-x64.dll ssl/libcrypto-1_1-x64.dll DESTINATION .)
 ####################################################################################
