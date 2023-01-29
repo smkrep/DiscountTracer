@@ -37,8 +37,8 @@ else()
     add_executable(DiscountTracer ${PROJECT_SOURCES})
 endif()
 
-target_link_libraries(DiscountTracer PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
-target_link_libraries(DiscountTracer PRIVATE Qt${QT_VERSION_MAJOR}::Network)
+target_link_libraries(DiscountTracer PRIVATE Qt${QT_VERSION_MAJOR}::Widgets ${CMAKE_DL_LIBS})
+target_link_libraries(DiscountTracer PRIVATE Qt${QT_VERSION_MAJOR}::Network ${CMAKE_DL_LIBS})
 
 set_target_properties(DiscountTracer PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
