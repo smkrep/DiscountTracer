@@ -11,7 +11,9 @@
 void MainWindow::openDll(fs::path path) {
 #ifdef _WIN32
     HINSTANCE load;
-    load = LoadLibrary(path.string().c_str());
+    std::string tmps(path.string());
+    std::wstring wide = std::wstring(tmps.begin(), tmps.end());
+    load = LoadLibraryW(wide.c_str());
     MainWindow::insertDllIntoList(load, path);
 
 #else
@@ -411,7 +413,6 @@ void MainWindow::exportListToJson() {
 
         if (file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate)) {
             QTextStream iStream(&file);
-            iStream.setCodec("utf-8");
             iStream << bytes;
             file.close();
 
